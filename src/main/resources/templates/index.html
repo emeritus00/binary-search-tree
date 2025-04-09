@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BST Visualizer</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1><i class="fas fa-project-diagram"></i> Binary Search Tree Visualizer</h1>
+        <p>Enter numbers to generate and visualize a binary search tree</p>
+    </header>
+
+    <section class="input-section">
+        <form method="post" action="/submit">
+            <div class="form-group">
+                <label for="numbers"><i class="fas fa-list-ol"></i> Enter numbers (comma separated):</label>
+                <input type="text" id="numbers" name="numbers"
+                       th:value="${numbers != null} ? ${numbers} : ''"
+                       placeholder="e.g., 5,3,7,2,4,6,8" required>
+            </div>
+            <button type="submit" class="btn"><i class="fas fa-cogs"></i> Generate Tree</button>
+            <a href="/previous" class="btn btn-secondary"><i class="fas fa-history"></i> View Previous Trees</a>
+        </form>
+    </section>
+
+    <div th:if="${error}" class="error-message">
+        <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
+    </div>
+
+    <div th:if="${tree}" class="tree-container">
+        <h2><i class="fas fa-tree"></i> Tree Visualization</h2>
+        <div class="tree-visualization" th:text="${tree}"></div>
+
+        <div class="traversal-result">
+            <h3><i class="fas fa-sort-amount-down"></i> In-order Traversal</h3>
+            <p th:text="${inOrder}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
